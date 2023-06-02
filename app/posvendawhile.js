@@ -24,34 +24,88 @@ exports.enviar = async (req, res, admin) => {
       const responseorders = await axios.get(`https://api.mercadolibre.com/${resource}`, {headers: headers});
       const resultadoorders =  responseorders.data;
       const pack_id = resultadoorders.pack_id;
-  
-      if (!pack_id) {
-        const headers1 = {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        };
-        const data = {
-          "option_id": "OTHER",
-          "text": "vai q vai "
-        };
-        const response = await axios.post(`https://api.mercadolibre.com/messages/action_guide/packs/${orders_id}/option`, data, {headers: headers1});
-  
-        console.log('Resposta do envio da mensagem:', response.data); 
-      } else {
-        const headers1 = {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        };
-        const data = {
-          "option_id": "OTHER",
-          "text": "vai q vai "
-        };
-        const response = await axios.post(`https://api.mercadolibre.com/messages/action_guide/packs/${pack_id}/option`, data, {headers: headers1});
-  
-        console.log('Resposta do envio da mensagem:', response.data); 
+      const MLB = resultadoorders.order_items[0].item.id
+      if (MLB == '' || '' || ''){
+          if (!pack_id) {
+            const headers1 = {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            };
+            const data = {
+              "option_id": "OTHER",
+              "text": "tpa/sem"
+            };
+            const response = await axios.post(`https://api.mercadolibre.com/messages/action_guide/packs/${orders_id}/option`, data, {headers: headers1});
+      
+            console.log('Resposta do envio da mensagem:', response.data); 
+          } else {
+            const headers1 = {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            };
+            const data = {
+              "option_id": "OTHER",
+              "text": "sem certificado"
+            };
+            const response = await axios.post(`https://api.mercadolibre.com/messages/action_guide/packs/${pack_id}/option`, data, {headers: headers1});
+      
+            console.log('Resposta do envio da mensagem:', response.data); 
+          }
+      } else if (MLB == '' || '' || ''){
+          if (!pack_id) {
+            const headers1 = {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            };
+            const data = {
+              "option_id": "OTHER",
+              "text": "com certificado"
+            };
+            const response = await axios.post(`https://api.mercadolibre.com/messages/action_guide/packs/${orders_id}/option`, data, {headers: headers1});
+      
+            console.log('Resposta do envio da mensagem:', response.data); 
+          } else {
+            const headers1 = {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            };
+            const data = {
+              "option_id": "OTHER",
+              "text": "com certificado"
+            };
+            const response = await axios.post(`https://api.mercadolibre.com/messages/action_guide/packs/${pack_id}/option`, data, {headers: headers1});
+      
+            console.log('Resposta do envio da mensagem:', response.data); 
+          }
+      }else {
+          if (!pack_id) {
+            const headers1 = {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            };
+            const data = {
+              "option_id": "OTHER",
+              "text": "sem nada"
+            };
+            const response = await axios.post(`https://api.mercadolibre.com/messages/action_guide/packs/${orders_id}/option`, data, {headers: headers1});
+      
+            console.log('Resposta do envio da mensagem:', response.data); 
+          } else {
+            const headers1 = {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            };
+            const data = {
+              "option_id": "OTHER",
+              "text": "sem nada"
+            };
+            const response = await axios.post(`https://api.mercadolibre.com/messages/action_guide/packs/${pack_id}/option`, data, {headers: headers1});
+      
+            console.log('Resposta do envio da mensagem:', response.data); 
+          }
       }
-  
-      console.log('Resposta da orders_id:');
+
+      console.log('Resposta da orders_id:', resultadoorders);
       retry = false; // Saída do loop caso a execução seja bem-sucedida
     } catch (error) {
       // Se ocorrer um erro, atualize o access token
