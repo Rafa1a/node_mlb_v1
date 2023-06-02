@@ -1,20 +1,12 @@
 const axios = require('axios');
-const admin = require('firebase-admin');
 
 const clientId = '2898738539387497';
 const clientSecret = 'gAEBaHQf2MxtkRmV2nb4XxQV5l3CXEWq';
 
-admin.initializeApp();
 
-exports.index = async (req, res) => {
+exports.permissao = async (req, res, admin) => {
   const docRef = admin.firestore().collection('allnec').doc('code_tokens');
-  const getdoc = await docRef.get();
-       
-  const dados = getdoc.data();
-    
-  const code = dados.code;
-
-  //const code = req.query.code;
+  const code = req.query.code;
 
   const data = {
     grant_type: 'authorization_code',
@@ -29,7 +21,7 @@ exports.index = async (req, res) => {
     'content-type': 'application/x-www-form-urlencoded',
   }
   axios
-    .post('https://api.mercadolibre.com/oauth/token', data, {headers})
+    .post('https://api.mercadolibre.com/oauth/token', data,  {headers: headers})
     .then(async (response) => {
       const resultado = response.data;
 
