@@ -35,12 +35,12 @@ exports.permissao = async (req, res, admin) => {
       console.log('Access Token:', resultado.access_token);
       console.log('Code:', resultado.refresh_token);
 
-
+      
       /*console.log(
         `<a href="https://auth.mercadolivre.com.br/authorization?response_type=code&client_id=2898738539387497&redirect_uri=https://us-central1-frangoboss.cloudfunctions.net/back_posvenda_mlb">Solicitar permissio</a>`
       );
 */
-      res.status(200).send('Autorização concluída. Verifique o console para obter os tokens de acesso.');
+      res.status(200).send('Autorização concluída. Tudo Pronto para funcionar');
     })
     .catch((error) => {
       console.error('Erro:', error);
