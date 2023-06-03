@@ -20,7 +20,7 @@ exports.enviar = async (req, res, admin) => {
         const pack_id = resultadoorders.pack_id;
         const MLB = resultadoorders.order_items[0].item.id
 
-        if (MLB == 'MLB3337547121' || 'MLB3337991729') {
+        if (MLB == 'MLB3337547121' || MLB == 'MLB3337991729') {
             if (!pack_id) {
                 try {
                     const headers1 = {
