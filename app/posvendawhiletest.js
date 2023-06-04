@@ -14,12 +14,16 @@ exports.enviar = async (req, res, admin) => {
         const headers = {
           'Authorization': `Bearer ${token}`
         };
+        
         //CONEXAO ORDERS_ID
+
         const responseorders = await axios.get(`https://api.mercadolibre.com/${resource}`, {headers: headers});
         const resultadoorders =  responseorders.data;
         const pack_id = resultadoorders.pack_id;
         const MLB = resultadoorders.order_items[0].item.id
+
         // BANCO DE DADOS TEXTO 
+
         const doctext= admin.firestore().collection('allnec').doc('texto_posvenda');
         const getdoctext = await doctext.get();
         const dadostext = getdoctext.data();
