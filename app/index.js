@@ -14,11 +14,11 @@ exports.index = async (req, res) => {
     const code = dados && dados.code ? dados.code : '';
   
     if (!code) {
-      per.permissao(req, res);
+      per.permissao(req, res, admin);
     } else {
       if (req.body.topic === 'orders_v2') {
         res.status(200).send('ok')
-        env.enviar(req, res);
+        env.enviar(req, res, admin);
       }else{
         res.status(200).send('ok')
       }
