@@ -41,17 +41,13 @@ exports.enviar = async (req, res, admin) => {
                     };
                     const data = {
                         "option_id": "OTHER",
-                        "text": "testando"
+                        "text": "Somos da Allnec, fabricante dos aparelhos TPA e MT19. Atenção: Informamos que o item que você adquiriu não possui certificado. Estamos à disposição para ajudar com quaisquer dúvidas ou questões relacionadas aos nossos produtos."
                     };
                     const response = await axios.post(`https://api.mercadolibre.com/messages/action_guide/packs/${orders_id}/option`, data, {headers: headers1});
                     
                     console.log('Resposta do envio da mensagem:', response.data);
                     retry = false;
-                    if (ids.length > 90) {
-                        ids.shift();
-                        await docorder.update({ ids: ids });
-                    }
-                    await docorder.update({ ids: [...ids, orders_id] });
+                    
                     }
                 catch (error) {
                     if (error.response && error.response.status === 403) {
@@ -75,11 +71,10 @@ exports.enviar = async (req, res, admin) => {
                     };
                     const data = {
                         "option_id": "OTHER",
-                        "text": "tpa10k testando unico"
+                        "text": "Somos da Allnec, fabricante dos aparelhos TPA e MT19. Fale um 'oi' nas mensagens, e receba orientações passo a passo para gerar certificado. Estamos à disposição para ajudar com quaisquer dúvidas ou questões relacionadas aos nossos produtos."
                     };
                     const response = await axios.post(`https://api.mercadolibre.com/messages/action_guide/packs/${orders_id}/option`, data, {headers: headers1});
                     
-                    console.log('Resposta do envio da mensagem:', response.data);
                     if (ids.length > 90) {
                         ids.shift();
                         await docorder.update({ ids: ids });
@@ -109,16 +104,11 @@ exports.enviar = async (req, res, admin) => {
                     };
                     const data = {
                         "option_id": "OTHER",
-                        "text": "vsem MLB testando"
+                        "text": "Somos da Allnec, fabricante dos aparelhos TPA e MT19. Estamos à disposição para ajudar com quaisquer dúvidas ou questões relacionadas aos nossos produtos."
                     };
                     const response = await axios.post(`https://api.mercadolibre.com/messages/action_guide/packs/${orders_id}/option`, data, {headers: headers1});
                     
                     console.log('Resposta do envio da mensagem:', response.data);
-                    if (ids.length > 90) {
-                        ids.shift();
-                        await docorder.update({ ids: ids });
-                    }
-                    await docorder.update({ ids: [...ids, orders_id] });
                     retry = false;
                     }
                 catch (error) {
@@ -131,6 +121,7 @@ exports.enviar = async (req, res, admin) => {
                         console.error('Erro na solicitação mensagem:', error.message);
                         // Aguarde um tempo antes de tentar novamente
                         await new Promise(resolve => setTimeout(resolve, 1000));
+                        res.status(500).send(error);
                     }
                 }
             }
@@ -143,6 +134,7 @@ exports.enviar = async (req, res, admin) => {
         console.error('Erro na solicitação orders_id:', error.message);
         // Aguarde um tempo antes de tentar novamente
         await new Promise(resolve => setTimeout(resolve, 1000));
+        res.status(500).send(error);
       }
     }
   };
