@@ -12,7 +12,7 @@ exports.refresh = async (req, res, admin) => {
   const dados = getdoc.data();
     
   const code = dados.code;
-
+ 
   const data = {
     grant_type: 'refresh_token',
     client_id: clientId,

@@ -7,10 +7,8 @@ const storage = new Storage();
 const bucketName = 'gcf-sources-909553356548-us-central1';
 const fileName = 'allnecpdfs/output.pdf';
 
-const admin = require('firebase-admin');
-admin.initializeApp();
 
-exports.index = async (req, res) => {
+exports.pdfpost = async (req, res, admin) => {
   try {
     // Recuperar tokens do Firestore
     const docRef = admin.firestore().collection('allnec').doc('code_tokens');
@@ -18,6 +16,7 @@ exports.index = async (req, res) => {
     const dados = getDoc.data();
     const token = dados.access_token;
 
+    const docpdf = admin.firestore().collection('allnec').doc('pdf_id');
     // Recuperar o arquivo PDF do Google Cloud Storage
     const bucket = storage.bucket(bucketName);
     const file = bucket.file(fileName);
@@ -38,9 +37,17 @@ exports.index = async (req, res) => {
 
     // Enviar a solicitação POST
     const response = await axios.post(url, formData, { headers });
+    
+    //salvar id no banco de dados
+    const resultado = response.data
+    const data = {
+        id : resultado.id
+    }
+    
+    docpdf.set(data)
 
     // Processar a resposta
-    console.log('Resposta:', response.data);
+    console.log('Resposta:', resultado);
     res.status(200).send('Arquivo PDF enviado com sucesso para o Mercado Livre');
   } catch (error) {
     console.error('Erro:', error);
