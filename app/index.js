@@ -39,14 +39,17 @@ exports.index = async (req, res) => {
           pdf.pdfpost(req, res, admin)
         }
       //enviar mensagem 
-
-        msg.messages(req, res, admin)
+        if (req.body.attempts === 1){
+          msg.messages(req, res, admin) 
+        }
+       
 
       // tentativas igual 2 refreshtoken
 
-        if (req.body.attempts === 2) {
+      if (req.body.attempts === 2) {
           ref.refresh(req, res, admin);
         }
+        
       }else {
         res.status(200).send('ok')
       }

@@ -38,7 +38,7 @@ exports.refresh = async (req, res, admin) => {
       console.log('Access Token:', resultado.access_token);
       console.log('Code:', resultado.refresh_token);
 
-     
+      
     })
     .catch((error) => {
       console.error('Erro:', error);

@@ -3,13 +3,7 @@ const admin = require('firebase-admin');
 admin.initializeApp();
 
 exports.index = async (req, res) => {
-    //console.log('topic fora da condicao:', req.body.topic);
-
-    // const resource = req.body.resource
-  
-    // console.log("userID : ", req.body.user_id)
-    // console.log('resource:', resource)
-
+   
     try {
         // Recuperar tokens do Firestore
         const docRef = admin.firestore().collection('allnec').doc('code_tokens');
@@ -28,11 +22,15 @@ exports.index = async (req, res) => {
         // Processar a resposta
         
 
-        const results = response.data.results;
-        const ids = ['2000005785654496', '2000005790218812', '2000005784173620', '2000005788806102', '2000005790287390', '2000005786024274']; // Substitua pelos seus valores reais
-        const ids2 = ['id2', '2000005784173620', '2000005785654496']; // Substitua pelos seus valores reais
+        const results = response.data.results 
         const globalArray = [];
-
+        //IMPORTAR IDS 
+        const docorder = admin.firestore().collection('allnec').doc('orders_id');
+        const getdo = await docorder.get();    
+        const dado = getdo.data();
+        const ids = dado.ids;
+        const ids2 = dado.ids2
+        
         for (let i = 0; i < results.length; i++) {
             const resourceValue = results[i].resource;
             const match = resourceValue.match(/\/packs\/(\d+)\//);
@@ -43,7 +41,7 @@ exports.index = async (req, res) => {
                 }
             }
         }
-
+        
         console.log('globalArray:', globalArray);
 
         res.status(200).send(globalArray);

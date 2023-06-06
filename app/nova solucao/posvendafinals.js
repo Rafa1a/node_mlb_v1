@@ -32,7 +32,7 @@ exports.enviar = async (req, res, admin) => {
         if (ids.includes(orders_id)){
             return
         }else {
-            if (MLB == 'MLB3337547121' || MLB == 'MLB3337991729') {
+            if (MLB == 'MLB860044284' || MLB == 'MLB860793131' || MLB == 'MLB948500675' || MLB == 'MLB1722608932' || MLB == 'MLB3188602750' || MLB == 'MLB1757687138' || MLB == 'MLB2048672953' || MLB == 'MLB3258278429') {
 
                 try {
                     const headers1 = {
@@ -62,7 +62,7 @@ exports.enviar = async (req, res, admin) => {
                     }
                     }
 
-        }else if (MLB == 'MLB3693555292') {
+        }else if (MLB == 'MLB860793560' || MLB == 'MLB1163570011' || MLB == 'MLB1726169128' || MLB == 'MLB2048679577' || MLB == 'MLB3258314215') {
             
                 try {
                     const headers1 = {
@@ -77,9 +77,11 @@ exports.enviar = async (req, res, admin) => {
                     
                     if (ids.length > 90) {
                         ids.shift();
-                        await docorder.update({ ids: ids });
+                        await docorder.update({ ids: [...ids, orders_id] });
+                    }else {
+                        await docorder.update({ ids: [...ids, orders_id] });
                     }
-                    await docorder.update({ ids: [...ids, orders_id] });
+                    
                     retry = false;
                 }
                 catch (error) {
