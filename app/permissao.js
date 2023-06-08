@@ -1,11 +1,12 @@
 const axios = require('axios');
 
-const clientId = '2898738539387497';
-const clientSecret = 'gAEBaHQf2MxtkRmV2nb4XxQV5l3CXEWq';
+const clientId = '8951575098014866';
+const clientSecret = 'aaJiU1dPYgV8rxH8kxXmiljrqLNiPa34';
+const admin = require('firebase-admin');
+admin.initializeApp();
 
-
-exports.permissao = async (req, res, admin) => {
-  const docRef = admin.firestore().collection('allnec').doc('code_tokens');
+exports.permissao = async (req, res) => {
+  const docRef = admin.firestore().collection('allnec_testes').doc('code_tokens');
   const code = req.query.code;
 
   const data = {
@@ -13,7 +14,7 @@ exports.permissao = async (req, res, admin) => {
     client_id: clientId,
     client_secret: clientSecret,
     code: code,
-    redirect_uri: 'https://us-central1-frangoboss.cloudfunctions.net/back_posvenda_mlb',
+    redirect_uri: 'https://southamerica-east1-frangoboss.cloudfunctions.net/ambientetest_back_posvenda_mlb-1',
     
   };
   const headers = {
@@ -37,7 +38,7 @@ exports.permissao = async (req, res, admin) => {
 
       
       /*console.log(
-        `<a href="https://auth.mercadolivre.com.br/authorization?response_type=code&client_id=2898738539387497&redirect_uri=https://us-central1-frangoboss.cloudfunctions.net/back_posvenda_mlb">Solicitar permissio</a>`
+        `<a href="https://auth.mercadolivre.com.br/authorization?response_type=code&client_id=8951575098014866&redirect_uri=https://southamerica-east1-frangoboss.cloudfunctions.net/ambientetest_back_posvenda_mlb-1">Solicitar permissio</a>`
       );
 */
       res.status(200).send('Autorização concluída. Tudo Pronto para funcionar');
