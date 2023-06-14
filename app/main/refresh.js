@@ -1,8 +1,8 @@
 const axios = require('axios');
 
 
-const clientId = '2898738539387497';
-const clientSecret = 'gAEBaHQf2MxtkRmV2nb4XxQV5l3CXEWq';
+const clientId = 'clientid';
+const clientSecret = 'clientsecret';
 
 
 exports.refresh = async (req, res, admin) => {

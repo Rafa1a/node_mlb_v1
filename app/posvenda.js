@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const ref = require('./refresh');
+const ref = require('./main/refresh');
 
 exports.enviar = async (req, res, admin) => {
     let retry = true;

@@ -1,7 +1,7 @@
 const axios = require('axios');
 
-const clientId = '8951575098014866';
-const clientSecret = 'aaJiU1dPYgV8rxH8kxXmiljrqLNiPa34';
+const clientId = 'clientid';
+const clientSecret = 'clientsecret';
 const admin = require('firebase-admin');
 admin.initializeApp();
 

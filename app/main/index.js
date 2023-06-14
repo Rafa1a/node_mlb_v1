@@ -1,5 +1,5 @@
 const per = require('./permissao');
-const env = require('./posvenda');
+const env = require('../posvenda');
 const pdf = require('./pdf_post');
 const msg = require('./messages');
 const ref = require('./refresh');
